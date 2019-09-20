@@ -92,8 +92,8 @@ relocate:
 	la a0, trampoline_pg_dir
 	srl a0, a0, PAGE_SHIFT
 	or a0, a0, a1
-	sfence.vma
 	csrw sptbr, a0
+	sfence.vma
 1:
 	/* Set trap vector to spin forever to help debug */
 	la a0, .Lsecondary_park
@@ -107,7 +107,7 @@ relocate:
 
 	/* Switch to kernel page tables */
 	csrw sptbr, a2
-
+	sfence.vma
 	ret
 
 .Lsecondary_start:
